@@ -2,7 +2,7 @@
 	var obj = {
 		name: '狼族小狈',
 		QQ: 1340641314,
-		github: 'https://github.com/1340641314/layer',
+		github: 'https://github.com/1340641314/cloud',
 		statement: '在保留头部版权的情况下，可以自由发布修改，应用于商业用途',
 		version: '1.0.0',
 		update: '2016-1-5'
@@ -11,7 +11,7 @@
 (function (win) {
 
   var doc = document;
-  win.layer = {
+  win.cloud = {
     setting: null,
     style: null,
     element: {},
@@ -23,17 +23,17 @@
       
       //主框架
       element.oLayer = doc.createElement('div');
-      element.oLayer.className = 'layer';
+      element.oLayer.className = 'cloud';
 
       //主内容区
       element.oMain = doc.createElement('div');
-      element.oMain.className = 'layer-main';
+      element.oMain.className = 'cloud-main';
       element.oLayer.appendChild(element.oMain);
 
       //罩层
       if (setting.covered != false) {
         element.oCovered = doc.createElement('div');
-        element.oCovered.className = 'layer-covered';
+        element.oCovered.className = 'cloud-covered';
         if (setting.coveredClose != false) {
           element.oCovered.addEventListener('click', function (oLayer) {
             this.close(oLayer);
@@ -45,14 +45,14 @@
       //标题
       if (setting.title) {
         element.oTitle = doc.createElement('div');
-        element.oTitle.className = 'layer-title';
+        element.oTitle.className = 'cloud-title';
         element.oTitle.innerHTML = setting.title;
         element.oMain.appendChild(element.oTitle);
 
         //关闭
         if (setting.close) {
           element.oClose = doc.createElement('div');
-          element.oClose.className = 'layer-title-close';
+          element.oClose.className = 'cloud-title-close';
           element.oClose.addEventListener('click', function (oLayer) {
             this.close(oLayer);
           }.bind(this, element.oLayer), false);
@@ -62,20 +62,20 @@
 
       //内容
       element.oContent = doc.createElement('div');
-      element.oContent.className = 'layer-content';
+      element.oContent.className = 'cloud-content';
       element.oContent.innerHTML = setting.content || '暂无内容';
       element.oMain.appendChild(element.oContent);
 
       //按钮
       if (setting.button && typeof (setting.button) === 'object' && typeof (setting.button.length) == 'number') {
         element.oButton = doc.createElement('div');
-        element.oButton.className = 'layer-button';
+        element.oButton.className = 'cloud-button';
 
         //循环子列表按钮
         var aButton = setting.button;
         for (var i = 0; i < aButton.length; i++) {
           var oBtn = doc.createElement('div');
-          oBtn.className = 'layer-button-item';
+          oBtn.className = 'cloud-button-item';
           oBtn.innerHTML = aButton[i].name;
           //按钮绑定事件
           if (!aButton[i].callback) {
@@ -129,17 +129,17 @@
       }
     },
     msg: function (content, type, time) {
-      var layerStyle = {};
+      var cloudStyle = {};
 
       if (type == 'top') {
-        layerStyle.top = '50px';
-        layerStyle.bottom = 'auto';
+        cloudStyle.top = '50px';
+        cloudStyle.bottom = 'auto';
       } else if (type == 'center') {
-        layerStyle.top = 'auto';
-        layerStyle.bottom = '50%';
+        cloudStyle.top = 'auto';
+        cloudStyle.bottom = '50%';
       } else {
-        layerStyle.top = 'auto';
-        layerStyle.bottom = '50px';
+        cloudStyle.top = 'auto';
+        cloudStyle.bottom = '50px';
       }
       
       this.open({
@@ -147,7 +147,7 @@
         content: content,
         time: time || 1000
       }, {
-        layer: layerStyle,
+        cloud: cloudStyle,
         main: {
           minWidth: '0'
         },
@@ -196,9 +196,9 @@
       this.open({
         covered: true,
         coveredClose: coveredClose,
-        content: '<div class="layer-content-loading"></div><p style="font-size: 13px; color: #222;">' + content + '</p>'
+        content: '<div class="cloud-content-loading"></div><p style="font-size: 13px; color: #222;">' + content + '</p>'
       }, {
-        layer: {
+        cloud: {
           top: '40%',
           bottom: 'auto'
         },
