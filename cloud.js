@@ -6,7 +6,7 @@
 		statement: '在保留头部版权的情况下，可以自由发布修改，应用于商业用途',
 		version: '1.0.0',
 		update: '2016-1-5'
-	}; 
+	};
 */
 (function (win) {
 
@@ -20,7 +20,7 @@
       var element = this.element;
       var setting = this.setting;
       var style = this.style;
-      
+
       //主框架
       element.oLayer = doc.createElement('div');
       element.oLayer.className = 'cloud';
@@ -141,7 +141,7 @@
         cloudStyle.top = 'auto';
         cloudStyle.bottom = '50px';
       }
-      
+
       this.open({
         covered: false,
         content: content,
@@ -174,7 +174,7 @@
         coveredClose: false,
         content: content,
         button: [{
-          name: '取消', 
+          name: '取消',
           callback: leftFn
         }, {
           name: '确定',
