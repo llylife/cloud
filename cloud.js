@@ -40,6 +40,7 @@
           }.bind(this, element.oCloud), false);
         }
         element.oCloud.appendChild(element.oCovered);
+        doc.body.style.overflow = 'hidden';
       }
 
       //标题
@@ -117,7 +118,6 @@
       this.setting = setting || {};
       this.style = style || {};
       this.init();
-
     },
     close: function (oCloud) {
       if (!oCloud) {
@@ -126,6 +126,7 @@
       //移除节点
       if (oCloud.parentNode == document.body) {
         document.body.removeChild(oCloud);
+        doc.body.style.overflow = '';
       }
     },
     msg: function (content, type, time) {
