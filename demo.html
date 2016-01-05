@@ -19,8 +19,8 @@
     }
 
   </style>
-  <link rel="stylesheet" href="layer.min.css">
-  <script type="text/javascript" src="layer.min.js"></script>
+  <link rel="stylesheet" href="cloud.min.css">
+  <script type="text/javascript" src="cloud.min.js"></script>
 </head>
 
 <body style="padding-bottom: 5000px;">
@@ -35,7 +35,7 @@
   <script type="text/javascript">
     //综合框
     function comp() {
-      layer.open({
+      cloud.open({
         title: '自定义标题', //标题，有值是才显示，默认不显示（String类型）（非必传参数）
         close: true, //标题上面的关闭按钮,true时才显示，false不显示，默认false（Boolean类型）（非必传参数）
         content: '自定义内容', //内容，（String类型）（必传参数）
@@ -57,7 +57,7 @@
 
     //自定义
     function opens() {
-      layer.open({
+      cloud.open({
         content: '这是可以可以由你任意定义的弹层',
         time: 2500
       });
@@ -65,12 +65,12 @@
 
     //提示框
     function explain() {
-      layer.explain('你正在运行javascript程序');
+      cloud.explain('你正在运行javascript程序');
     }
 
     //询问框
     function asked() {
-      layer.asked('你爱我吗', function() {
+      cloud.asked('你爱我吗', function() {
         this.explain('我也爱你');
       }, function() {
         this.explain('啥，你居然不爱我？');
@@ -79,19 +79,19 @@
 
     //确定框
     function alerts() {
-      layer.alert('你想说什么');
+      cloud.alert('你想说什么');
     }
 
     //消息框
     function msg() {
-      layer.msg('上面,默认一秒消失', 'top');
-      layer.msg('中间，设置两秒消失', 'center', 2000);
-      layer.msg('下面，设置三秒消失', 'bottom', 3000);
+      cloud.msg('上面,默认一秒消失', 'top');
+      cloud.msg('中间，设置两秒消失', 'center', 2000);
+      cloud.msg('下面，设置三秒消失', 'bottom', 3000);
     }
 
     //加载框
     function load() {
-      layer.load('疯狂加载中', true); //第二个参数，true为点击罩层关闭，false为不关闭（需执行layer.colse()关闭），非必传参数
+      cloud.load('疯狂加载中', true); //第二个参数，true为点击罩层关闭，false为不关闭（需执行cloud.colse()关闭），非必传参数
     }
 
   </script>
