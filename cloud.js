@@ -22,24 +22,24 @@
       var style = this.style;
 
       //主框架
-      element.oLayer = doc.createElement('div');
-      element.oLayer.className = 'cloud';
+      element.oCloud = doc.createElement('div');
+      element.oCloud.className = 'cloud';
 
       //主内容区
       element.oMain = doc.createElement('div');
       element.oMain.className = 'cloud-main';
-      element.oLayer.appendChild(element.oMain);
+      element.oCloud.appendChild(element.oMain);
 
       //罩层
       if (setting.covered != false) {
         element.oCovered = doc.createElement('div');
         element.oCovered.className = 'cloud-covered';
         if (setting.coveredClose != false) {
-          element.oCovered.addEventListener('click', function (oLayer) {
-            this.close(oLayer);
-          }.bind(this, element.oLayer), false);
+          element.oCovered.addEventListener('click', function (oCloud) {
+            this.close(oCloud);
+          }.bind(this, element.oCloud), false);
         }
-        element.oLayer.appendChild(element.oCovered);
+        element.oCloud.appendChild(element.oCovered);
       }
 
       //标题
@@ -53,9 +53,9 @@
         if (setting.close) {
           element.oClose = doc.createElement('div');
           element.oClose.className = 'cloud-title-close';
-          element.oClose.addEventListener('click', function (oLayer) {
-            this.close(oLayer);
-          }.bind(this, element.oLayer), false);
+          element.oClose.addEventListener('click', function (oCloud) {
+            this.close(oCloud);
+          }.bind(this, element.oCloud), false);
           element.oTitle.appendChild(element.oClose);
         }
       }
@@ -81,10 +81,10 @@
           if (!aButton[i].callback) {
             aButton[i].callback = function () {}; //如果没有回调函数，则给一个空函数
           }
-          oBtn.addEventListener('click', function (oLayer, callback) {
-            this.close(oLayer);
+          oBtn.addEventListener('click', function (oCloud, callback) {
+            this.close(oCloud);
             callback(); //执行按钮回调函数
-          }.bind(this, element.oLayer, aButton[i].callback.bind(this)), false);
+          }.bind(this, element.oCloud, aButton[i].callback.bind(this)), false);
           element.oButton.appendChild(oBtn);
         }
 
@@ -99,18 +99,18 @@
         var curStyle = style[key];
 
         for (var attr in curStyle) {
-          this.element['o' + name].style[attr] = curStyle[attr];
+          element['o' + name].style[attr] = curStyle[attr];
         }
       }
 
       //显示弹层
-      doc.body.appendChild(element.oLayer);
+      doc.body.appendChild(element.oCloud);
 
       //设置定时器
       if (typeof (setting.time) == 'number') {
-        this.timer = setTimeout(function (oLayer) {
-          this.close(oLayer);
-        }.bind(this, element.oLayer), setting.time);
+        this.timer = setTimeout(function (oCloud) {
+          this.close(oCloud);
+        }.bind(this, element.oCloud), setting.time);
       }
     },
     open: function (setting, style) {
@@ -119,13 +119,13 @@
       this.init();
 
     },
-    close: function (oLayer) {
-      if (!oLayer) {
-        oLayer = this.element.oLayer;
+    close: function (oCloud) {
+      if (!oCloud) {
+        oCloud = this.element.oCloud;
       }
       //移除节点
-      if (oLayer.parentNode == document.body) {
-        document.body.removeChild(oLayer);
+      if (oCloud.parentNode == document.body) {
+        document.body.removeChild(oCloud);
       }
     },
     msg: function (content, type, time) {
