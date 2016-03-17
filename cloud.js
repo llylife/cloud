@@ -233,7 +233,7 @@
             var _this = this;
             cloud.open({
                 title: '选择框',
-                content: '<div class="cloud-content-select" ontouchstart="this.style.overflow = \'scroll\';" onmousemove="this.style.overflow = \'scroll\';"></div>',
+                content: '<div class="cloud-content-select"></div>',
                 button: [{
                     name: '取消'
                 }],
