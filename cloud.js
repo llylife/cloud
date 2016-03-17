@@ -10,15 +10,10 @@
 */
 (function (name, definition) {
     //检测上下文环境是否为AMD或CMD
-    var hasDefine = typeof define === 'function',
-        // 检测上下文环境是否为Node
-        hasExports = typeof (module) !== 'function';
+    var hasDefine = typeof define === 'function';
     if (hasDefine) {
         //AMD环境或CMD环境
         define(definition);
-    } else if (hasExports && module.exports) {
-        //Node 模块
-        module.exports = definition;
     } else {
         //浏览器普通调用模式
         this[name] = definition;
