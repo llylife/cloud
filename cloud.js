@@ -16,7 +16,7 @@
         define(definition);
     } else {
         //浏览器普通调用模式
-        this[name] = definition;
+        this[name] = definition();
     }
 
 })('cloud', function () {
@@ -116,7 +116,10 @@
 
             //显示弹层
             doc.body.appendChild(element.oCloud);
-
+            //弹层创建完成后执行方法，传入弹层总盒子的doc
+            if (typeof (setting.load) == 'function') {
+                setting.load(element.oCloud);
+            }
             //设置定时器
             if (typeof (setting.time) == 'number') {
                 this.timer = setTimeout(function (oCloud) {
@@ -223,6 +226,34 @@
                     fontSize: '13px',
                     textAlign: 'center',
                     color: '#555'
+                }
+            });
+        },
+        select: function (title, list, key, callback) {
+            var _this = this;
+            cloud.open({
+                title: '选择框',
+                content: '<div class="cloud-content-select" ontouchstart="this.style.overflow = \'scroll\';" onmousemove="this.style.overflow = \'scroll\';"></div>',
+                button: [{
+                    name: '取消'
+                }],
+                load: function (el) {
+                    var select = el.querySelector('.cloud-content-select');
+                    for (var i = 0; i < list.length; i++) {
+                        var div = document.createElement('div');
+                        div.className = 'cloud-content-select-list';
+                        div.innerHTML = list[i][key];
+                        div.datas = list[i];
+                        div.addEventListener('click', function () {
+                            _this.close();
+                            callback(this.datas);
+                        }, false);
+                        select.appendChild(div);
+                    }
+                }
+            }, {
+                content: {
+                    padding: '0 10px'
                 }
             });
         }
