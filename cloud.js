@@ -250,6 +250,10 @@
                         }, false);
                         select.appendChild(div);
                     }
+
+                    select.addEventListener('touchstart', function () {
+                        select.style.overflow = 'scroll';
+                    }, false);
                 }
             }, {
                 content: {
