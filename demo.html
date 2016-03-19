@@ -12,106 +12,469 @@
             list-style: none;
         }
         
+        html,
+        body {
+            width: 100%;
+            height: 100%;
+            background: #fff;
+        }
+        
+        body {
+            max-width: 940px;
+            margin: 0 auto;
+        }
+        
         button {
             padding: 5px 10px;
             margin: 10px;
             line-height: 28px;
         }
+        
+        .doc {
+            margin-bottom: 20px;
+        }
+        
+        .doc h2 {
+            padding: 0 10px;
+            line-height: 38px;
+            background: #eee;
+            border-bottom: 1px solid #bbb;
+            font-size: 16px;
+            color: #222;
+        }
+        
+        .doc table {
+            width: 100%;
+            background: #eee;
+        }
+        
+        .doc tr {
+            line-height: 28px;
+        }
+        
+        .doc tr th {
+            padding: 5px 10px;
+        }
+        
+        .doc tr th:nth-child(1) {
+            width: 100px;
+        }
+        
+        .doc tr th:nth-child(2) {
+            width: 100px;
+        }
+        
+        .doc tr td {
+            padding: 5px;
+            font-size: 14px;
+            color: #333;
+        }
     </style>
     <link rel="stylesheet" href="cloud.min.css">
-    <script type="text/javascript" src="cloud.min.js"></script>
+    <script type="text/javascript" src="cloud.js"></script>
 </head>
 
-<body style="padding-bottom: 500px;">
-    <button onclick="comp();">综合框</button>
-    <button onclick="opens();">自定义</button>
+<body>
+
+    <button onclick="text();">单行文本输入框</button>
+    <button onclick="textarea();">多行文本输入框</button>
     <button onclick="explain();">提示框</button>
-    <button onclick="asked();">询问框</button>
     <button onclick="alerts();">确定框</button>
+    <button onclick="asked();">询问框</button>
+    <button onclick="loading();">加载框</button>
     <button onclick="msg();">消息框</button>
-    <button onclick="load();">加载框</button>
-    <button onclick="select();">选择框</button>
+    <button onclick="select();">单选框</button>
+    <button onclick="checkbox();">多选框</button>
 
-    <script type="text/javascript">
-        //综合框
-        function comp() {
-            cloud.open({
-                title: '自定义标题', //标题，有值是才显示，默认不显示（String类型）（非必传参数）
-                close: true, //标题上面的关闭按钮,true时才显示，false不显示，默认false（Boolean类型）（非必传参数）
-                content: '自定义内容', //内容，（String类型）（必传参数）
-                covered: true, //罩层，true时显示，false时不显示，默认true(Boolean类型)，（非必传参数）
-                coveredClose: true, //罩层点击是否关闭层，true关闭，false不关闭，默认true（Boolean类型）（非必传参数）
-                button: [{ //按钮，有值才显示，默认不显示（Array类型）（非必传参数）
-                    name: '按钮1',
-                    callback: function () {
-                        this.alert('你点击了按钮1');
-                    }
-                }, {
-                    name: '按钮2',
-                    callback: function () {
-                        this.alert('你点击了按钮2');
-                    }
-                }],
-                load: function (el) { //弹层创建完成执行方法，传入一个总盒子的box对象
-                    console.log('弹层创建完成');
-                }
+    <script>
+        /**
+         * 单行文本输入框
+         */
+        function text() {
+            cloud.text('修改姓名', 'cloud.js', function (value) {
+                cloud.explain('你的姓名已经修改为：' + value, 'success');
             });
         }
-
-        //自定义
-        function opens() {
-            cloud.open({
-                content: '这是可以可以由你任意定义的弹层',
-                time: 2500
+        /**
+         * 单行文本输入框
+         */
+        function textarea() {
+            cloud.textarea('编辑', '深圳html5开发者社群 170761660', function (value) {
+                cloud.explain('修改成功：' + value, 'success');
             });
         }
-
-        //提示框
-        function explain() {
-            cloud.explain('你正在运行javascript程序');
-        }
-
-        //询问框
-        function asked() {
-            cloud.asked('你爱我吗', function () {
-                this.explain('我也爱你');
-            }, function () {
-                this.explain('啥，你居然不爱我？');
-            });
-        }
-
-        //确定框
+        /**
+         * 确定框
+         */
         function alerts() {
-            cloud.alert('你想说什么');
+            cloud.alert('我是狼族小狈，一个热爱前端开发小白');
         }
 
-        //消息框
-        function msg() {
-            cloud.msg('上面,默认一秒消失', 'top');
-            cloud.msg('中间，设置两秒消失', 'center', 2000);
-            cloud.msg('下面，设置三秒消失', 'bottom', 3000);
+        /**
+         * 提示框
+         */
+        function explain() {
+            cloud.explain('我是狼族小狈，一个热爱前端开发小白');
         }
 
-        //加载框
-        function load() {
-            cloud.load('疯狂加载中', true); //第二个参数，true为点击罩层关闭，false为不关闭（需执行cloud.colse()关闭），非必传参数
+        /**
+         * 询问框
+         */
+        function asked() {
+            cloud.asked('你喜欢我吗？', function () {
+                cloud.explain('其实我也觉得自己很棒！', 'success');
+            }, function () {
+                cloud.explain('什么？你居然不喜欢我！');
+            });
         }
-
-        //选择框
+        /**
+         * 单选框
+         */
         function select() {
-            var list = [];
 
-            for (var i = 1; i <= 30; i++) {
+            var list = [];
+            for (var i = 1; i < 13; i++) {
                 list.push({
-                    title: i
+                    name: i + '月',
+                    value: i
                 });
             }
 
-            cloud.select('选择框', list, 'title', function (data) {
-                cloud.alert('你选择的是：' + data.title);
+            cloud.select('你是那一月出生的', list, 'name', '1月', function (data) {
+                cloud.alert('这么巧，我也是' + data.name + '出生的');
             });
         }
+
+        /**
+         * 多选框
+         */
+        function checkbox() {
+
+            var list = [{
+                name: '文化'
+            }, {
+                name: '美食'
+            }, {
+                name: '风景'
+            }, {
+                name: '中国智造'
+            }, {
+                name: '美女'
+            }, {
+                name: '长城'
+            }];
+
+            cloud.checkbox('你喜欢中国的那些？', list, 'name', '文化,美食', function (list) {
+                var str = [];
+
+                for (var i = 0; i < list.length; i++) {
+                    str.push(list[i].name);
+                }
+                cloud.alert('你选择了：' + str.join(','));
+            });
+        }
+        /**
+         * 加载框
+         */
+        function loading() {
+            cloud.loading('正在加载中', true);
+        }
+        /**
+         * 消息框
+         */
+        function msg() {
+            cloud.msg('这是一个默认的消息框');
+            cloud.msg('头部的消息', '10%');
+            cloud.msg('底部的消息', '90%');
+        }
     </script>
+    <div class="doc">
+        <h2>自定义框：cloud.open({});</h2>
+        <table border="1px" cellspacing="0" cellpadding="0">
+            <tr>
+                <th>属性名称</th>
+                <th>参数类型</th>
+                <th>说明</th>
+            </tr>
+            <tr>
+                <td>title</td>
+                <td>String</td>
+                <td>标题区域：有值时才显示</td>
+            </tr>
+            <tr>
+                <td>closeBtn</td>
+                <td>Boolean</td>
+                <td>标题区域：标题上的关闭按钮，true时显示，false时不显示</td>
+            </tr>
+            <tr>
+                <td>content</td>
+                <td>String</td>
+                <td>内容区域：有值时才显示</td>
+            </tr>
+            <tr>
+                <td>icon</td>
+                <td>String</td>
+                <td>内容区域：内容要调用的图标，可自定义图标如： a.png当做参数传进来，系统自带succes,warning,error,loading四个图标，也可以传入系统自带图标名称</td>
+            </tr>
+            <tr>
+                <td>covered</td>
+                <td>Boolean</td>
+                <td>罩层区域：true时显示，false时不显示</td>
+            </tr>
+            <tr>
+                <td>coveredClose</td>
+                <td>Boolean</td>
+                <td>罩层区域：true点击罩层关闭云层，false时不关闭</td>
+            </tr>
+            <tr>
+                <td>button</td>
+                <td>Array</td>
+                <td>按钮区域：数组存对象{name: '按钮名称', callback: function () {}}</td>
+            </tr>
+            <tr>
+                <td>load</td>
+                <td>Function</td>
+                <td>云层创建成功后执行方法，传入dom对象，可以在此基础上修改样式，插入其他内容</td>
+            </tr>
+            <tr>
+                <td>close</td>
+                <td>Function</td>
+                <td>用户触发关闭机制时执行方法，传入dom对象，return false; 则拦截关闭云层</td>
+            </tr>
+        </table>
+    </div>
+
+    <div class="doc">
+        <h2>消息框：cloud.msg(content, position, time);</h2>
+        <table border="1px" cellspacing="0" cellpadding="0">
+            <tr>
+                <th>属性名称</th>
+                <th>参数类型</th>
+                <th>说明</th>
+            </tr>
+            <tr>
+                <td>content</td>
+                <td>String</td>
+                <td>提示的消息内容（必传参数）</td>
+            </tr>
+            <tr>
+                <td>position</td>
+                <td>String</td>
+                <td>消息框的位置，传入的值给设置到top样式，如：10%显示在顶部， 50%显示在中间，90%显示在底部</td>
+            </tr>
+            <tr>
+                <td>time</td>
+                <td>Number</td>
+                <td>消息框消失的时间，默认值：1500 = 1.5秒</td>
+            </tr>
+        </table>
+    </div>
+    <div class="doc">
+        <h2>单行文本输入框：cloud.text(title, content, callback);</h2>
+        <table border="1px" cellspacing="0" cellpadding="0">
+            <tr>
+                <th>属性名称</th>
+                <th>参数类型</th>
+                <th>说明</th>
+            </tr>
+            <tr>
+                <td>title</td>
+                <td>String</td>
+                <td>标题显示的提示（必传参数）</td>
+            </tr>
+            <tr>
+                <td>content</td>
+                <td>String</td>
+                <td>输入框的值（必传参数）</td>
+            </tr>
+            <tr>
+                <td>callback</td>
+                <td>Function</td>
+                <td>用户点击确定按钮后执行的回调方法，传入一个参数值即用户输入的内容</td>
+            </tr>
+        </table>
+    </div>
+    <div class="doc">
+        <h2>多行文本输入框：cloud.textarea(title, content, callback);</h2>
+        <table border="1px" cellspacing="0" cellpadding="0">
+            <tr>
+                <th>属性名称</th>
+                <th>参数类型</th>
+                <th>说明</th>
+            </tr>
+            <tr>
+                <td>title</td>
+                <td>String</td>
+                <td>标题显示的提示（必传参数）</td>
+            </tr>
+            <tr>
+                <td>content</td>
+                <td>String</td>
+                <td>输入框的值（必传参数）</td>
+            </tr>
+            <tr>
+                <td>callback</td>
+                <td>Function</td>
+                <td>用户点击确定按钮后执行的回调方法，传入一个参数值即用户输入的内容</td>
+            </tr>
+        </table>
+    </div>
+    <div class="doc">
+        <h2>确定框：cloud.alert(content);</h2>
+        <table border="1px" cellspacing="0" cellpadding="0">
+            <tr>
+                <th>属性名称</th>
+                <th>参数类型</th>
+                <th>说明</th>
+            </tr>
+            <tr>
+                <td>content</td>
+                <td>String</td>
+                <td>输入框的值（必传参数）</td>
+            </tr>
+        </table>
+    </div>
+    <div class="doc">
+        <h2>提示框：cloud.explain(content, icon);</h2>
+        <table border="1px" cellspacing="0" cellpadding="0">
+            <tr>
+                <th>属性名称</th>
+                <th>参数类型</th>
+                <th>说明</th>
+            </tr>
+            <tr>
+                <td>content</td>
+                <td>String</td>
+                <td>提示的内容（必传参数）</td>
+            </tr>
+            <tr>
+                <td>icon</td>
+                <td>String</td>
+                <td>图标，可传入succes,warning,error,loading 调用系统图标，也可以传图标地址进去自定义图标</td>
+            </tr>
+        </table>
+    </div>
+    <div class="doc">
+        <h2>询问框：cloud.asked(content, trueCallback, falseCallback);</h2>
+        <table border="1px" cellspacing="0" cellpadding="0">
+            <tr>
+                <th>属性名称</th>
+                <th>参数类型</th>
+                <th>说明</th>
+            </tr>
+            <tr>
+                <td>content</td>
+                <td>String</td>
+                <td>提示的内容（必传参数）</td>
+            </tr>
+            <tr>
+                <td>trueCallback</td>
+                <td>Function</td>
+                <td>用户点击确定执行的方法</td>
+            </tr>
+            <tr>
+                <td>falseCallback</td>
+                <td>Function</td>
+                <td>用户点击取消执行的方法</td>
+            </tr>
+        </table>
+    </div>
+    <div class="doc">
+        <h2>单选框：cloud.select(title, list, key, name, callback);</h2>
+        <table border="1px" cellspacing="0" cellpadding="0">
+            <tr>
+                <th>属性名称</th>
+                <th>参数类型</th>
+                <th>说明</th>
+            </tr>
+            <tr>
+                <td>title</td>
+                <td>String</td>
+                <td>标题</td>
+            </tr>
+            <tr>
+                <td>list</td>
+                <td>Array</td>
+                <td>列表的数据</td>
+            </tr>
+            <tr>
+                <td>key</td>
+                <td>String</td>
+                <td>列表显示的字段名称</td>
+            </tr>
+            <tr>
+                <td>name</td>
+                <td>String</td>
+                <td>被选中的名称</td>
+            </tr>
+            <tr>
+                <td>callback</td>
+                <td>Function</td>
+                <td>用户选择后执行的回调函数，传入一个参数，即用户选择的数据对象</td>
+            </tr>
+        </table>
+    </div>
+    <div class="doc">
+        <h2>多选框：cloud.checkbox(title, list, key, name, callback);</h2>
+        <table border="1px" cellspacing="0" cellpadding="0">
+            <tr>
+                <th>属性名称</th>
+                <th>参数类型</th>
+                <th>说明</th>
+            </tr>
+            <tr>
+                <td>title</td>
+                <td>String</td>
+                <td>标题</td>
+            </tr>
+            <tr>
+                <td>list</td>
+                <td>Array</td>
+                <td>列表的数据</td>
+            </tr>
+            <tr>
+                <td>key</td>
+                <td>String</td>
+                <td>列表显示的字段名称</td>
+            </tr>
+            <tr>
+                <td>name</td>
+                <td>String</td>
+                <td>被选中的名称</td>
+            </tr>
+            <tr>
+                <td>callback</td>
+                <td>Function</td>
+                <td>用户选择后执行的回调函数，传入一个参数，即用户选择的数据对象</td>
+            </tr>
+        </table>
+    </div>
+    <div class="doc">
+        <h2>加载框：cloud.loading(content, bool, icon);</h2>
+        <table border="1px" cellspacing="0" cellpadding="0">
+            <tr>
+                <th>属性名称</th>
+                <th>参数类型</th>
+                <th>说明</th>
+            </tr>
+            <tr>
+                <td>content</td>
+                <td>String</td>
+                <td>加载框提示的内容</td>
+            </tr>
+            <tr>
+                <td>bool</td>
+                <td>Boolean</td>
+                <td>true为点击罩层关闭，false为不关闭</td>
+            </tr>
+            <tr>
+                <td>icon</td>
+                <td>String</td>
+                <td>图标，可传入succes,warning,error,loading 调用系统图标，也可以传图标地址进去自定义图标</td>
+            </tr>
+
+        </table>
+    </div>
 </body>
 
 </html>
