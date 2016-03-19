@@ -6,14 +6,15 @@ NodeJS前端分享群 133240225
 
 -------------------
 </pre>
+
 ![Alt text](doc_images/doc.png)
-![Alt text](doc_images/demo (1).png)
-![Alt text](doc_images/demo (2).png)
-![Alt text](doc_images/demo (3).png)
-![Alt text](doc_images/demo (4).png)
-![Alt text](doc_images/demo (5).png)
-![Alt text](doc_images/demo (6).png)
-![Alt text](doc_images/demo (7).png)
-![Alt text](doc_images/demo (8).png)
-![Alt text](doc_images/demo (9).png)
+  ![Alt text](doc_images/demo (1).png)
+  ![Alt text](doc_images/demo (2).png)
+  ![Alt text](doc_images/demo (3).png)
+  ![Alt text](doc_images/demo (4).png)
+  ![Alt text](doc_images/demo (5).png)
+  ![Alt text](doc_images/demo (6).png)
+  ![Alt text](doc_images/demo (7).png)
+  ![Alt text](doc_images/demo (8).png)
+  ![Alt text](doc_images/demo (9).png)
 
