@@ -213,6 +213,7 @@
         });
 
         setTimeout(close, time || 1500); //定时关闭
+        return close;
     };
     /**
      * 单行文本输入框
@@ -221,7 +222,7 @@
      * @param {function} callback 用户编辑完成点击确定执行的回调函数，传入一个参数为用户输入的文字；用户取消则无回调函数
      */
     cloud.text = function (title, content, callback) {
-        this.open({
+        return this.open({
             title: title || '请输入内容',
             content: '<input class="cloud-text" type="text" value="' + (content || '') + '">',
             covered: true,
@@ -245,7 +246,7 @@
      * @param {function} callback 用户编辑完成点击确定执行的回调函数，传入一个参数为用户输入的文字；用户取消则无回调函数
      */
     cloud.textarea = function (title, content, callback) {
-        this.open({
+        return this.open({
             title: title || '请输入内容',
             content: '<textarea class="cloud-text">' + content + '</textarea>',
             covered: true,
@@ -267,7 +268,7 @@
      * @param {string}   content 提示的内容
      */
     cloud.alert = function (content) {
-        this.open({
+        return this.open({
             title: '系统提示',
             content: content,
             covered: true,
@@ -284,7 +285,7 @@
      * @param {string} icon    要使用的图标
      */
     cloud.explain = function (content, icon) {
-        this.open({
+        return this.open({
             content: content,
             covered: true,
             icon: icon || ''
@@ -297,7 +298,7 @@
      * @param {function} falseCallback 用户选择取消执行回调函数
      */
     cloud.asked = function (content, trueCallback, falseCallback) {
-        this.open({
+        return this.open({
             content: content,
             covered: true,
             button: [{
@@ -352,6 +353,7 @@
                 }, false);
             }
         }
+        return close;
     };
     /**
      * 多选框
@@ -401,7 +403,7 @@
                 }, false);
             }
         }
-
+        return close;
     };
 
     /**
@@ -427,7 +429,6 @@
             html.push('</div>');
         }
         return html.join('');
-
     }
     /**
      * 加载框
