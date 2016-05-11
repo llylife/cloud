@@ -9,10 +9,15 @@
 	};
 */
 !(function (cloud) {
-    if (typeof define === 'function' && define.amd) {
-        define(cloud());
+    if (typeof define === 'function' && typeof define.amd === 'object' && define.amd) {
+
+        define(function () {
+            return cloud;
+        });
+    } else if (typeof module !== 'undefined' && module.exports) {
+        module.exports = cloud;
     } else {
-        window.cloud = cloud();
+        window.cloud = cloud;
     }
 
 })(function () {
