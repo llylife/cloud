@@ -69,6 +69,7 @@
             font-size: 14px;
             color: #333;
         }
+
     </style>
     <link rel="stylesheet" href="cloud.min.css">
     <script type="text/javascript" src="cloud.js"></script>
@@ -91,7 +92,7 @@
          * 单行文本输入框
          */
         function text() {
-            cloud.text('修改姓名', 'cloud.js', function (value) {
+            cloud.text('修改姓名', 'cloud.js', function(value) {
                 cloud.explain('你的姓名已经修改为：' + value, 'success');
             });
         }
@@ -99,7 +100,7 @@
          * 单行文本输入框
          */
         function textarea() {
-            cloud.textarea('编辑', '深圳html5开发者社群 170761660', function (value) {
+            cloud.textarea('编辑', '深圳html5开发者社群 170761660', function(value) {
                 cloud.explain('修改成功：' + value, 'success');
             });
         }
@@ -121,9 +122,9 @@
          * 询问框
          */
         function asked() {
-            cloud.asked('你喜欢我吗？', function () {
+            cloud.asked('你喜欢我吗？', function() {
                 cloud.explain('其实我也觉得自己很棒！', 'success');
-            }, function () {
+            }, function() {
                 cloud.explain('什么？你居然不喜欢我！');
             });
         }
@@ -140,7 +141,7 @@
                 });
             }
 
-            cloud.select('你是那一月出生的', list, 'name', '1月', function (data) {
+            cloud.select('你是那一月出生的', list, 'name', '1月', function(data) {
                 cloud.alert('这么巧，我也是' + data.name + '出生的');
             });
         }
@@ -164,9 +165,9 @@
                 name: '长城'
             }];
 
-            cloud.checkbox('你喜欢中国的那些？', list, 'name', '文化,美食', function (list) {
+            cloud.checkbox('你喜欢中国的那些？', list, 'name', '文化,美食', function(list) {
                 var str = [];
-
+                console.log(list);
                 for (var i = 0; i < list.length; i++) {
                     str.push(list[i].name);
                 }
@@ -187,6 +188,7 @@
             cloud.msg('头部的消息', '10%');
             cloud.msg('底部的消息', '90%', 3000);
         }
+
     </script>
     <div class="doc">
         <h2>自定义框：cloud.open({});</h2>

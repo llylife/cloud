@@ -55,7 +55,10 @@
             createHtml();
             eventBind();
             show();
-            return close;
+            return {
+                close: close,
+                el: elCloud
+            };
         }
         /**
          * 覆盖默认配置
@@ -191,7 +194,7 @@
      */
     cloud.msg = function (content, position, time) {
         var bool = true;
-        var close = this.open({
+        var cloud = this.open({
             content: content,
             load: function (el) {
                 el.style.top = position || '50%';
@@ -208,15 +211,16 @@
             close: function (el) {
                 if (bool) {
                     el.style.cssText += '-webkit-transition: all 0.5s;transition: all 0.5s;opacity: 0;';
-                    bool = true;
+                    bool = false;
+                    setTimeout(cloud.close, 500);
+                    return false;
+                } else {
+                    return true;
                 }
-
-                return false; //关闭系统自动关闭
             }
         });
-
-        setTimeout(close, time || 1500); //定时关闭
-        return close;
+        setTimeout(cloud.close, time || 1500); //定时关闭
+        return cloud;
     };
     /**
      * 单行文本输入框
@@ -326,7 +330,7 @@
     cloud.select = function (title, list, key, name, callback) {
 
         //保存关闭的方法
-        var close = this.open({
+        var cloud = this.open({
             title: title,
             content: createSelectHtml(title, list, key, name),
             covered: true,
@@ -352,11 +356,11 @@
                     this.querySelector('div').className = 'cloud-select-true';
                     var index = parseInt(this.dataset.index);
                     callback(list[index]);
-                    close();
+                    cloud.close();
                 }, false);
             }
         }
-        return close;
+        return cloud;
     };
     /**
      * 多选框
@@ -368,8 +372,7 @@
      */
     cloud.checkbox = function (title, list, key, data, callback) {
 
-        //保存关闭的方法
-        var close = this.open({
+        var cloud = this.open({
             title: title,
             content: createSelectHtml(title, list, key, name),
             covered: true,
@@ -406,7 +409,7 @@
                 }, false);
             }
         }
-        return close;
+        return cloud;
     };
 
     /**
